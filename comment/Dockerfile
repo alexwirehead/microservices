@@ -1,5 +1,9 @@
-FROM ruby:2.2
-RUN apt-get update -qq && apt-get install -y build-essential
+FROM alpine:latest
+RUN apk update && \
+    apk upgrade && \
+    apk add bash ruby ruby-io-console curl-dev ruby-dev build-base \
+    && gem install bundler:1.14.6 --no-ri --no-rdoc
+
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
