@@ -1,7 +1,8 @@
 FROM alpine:latest
 RUN apk update && \
     apk upgrade && \
-    apk add bash ruby ruby-io-console curl-dev ruby-dev build-base ruby-json \
+    apk add bash curl-dev build-base ruby ruby-dev ruby-json \
+    ruby-bigdecimal ruby-io-console \
     && gem install bundler:1.14.6 --no-ri --no-rdoc
 
 ENV APP_HOME /app
