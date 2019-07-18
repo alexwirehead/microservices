@@ -8,7 +8,7 @@ ENV APP_HOME=/app \
 
 RUN apk update && \
     apk upgrade && \
-    apk add bash ruby ruby-io-console curl-dev ruby-dev build-base \
+    apk add bash ruby ruby-io-console curl-dev ruby-dev build-base ruby-json \
     && gem install bundler:1.14.6 --no-ri --no-rdoc \
     && rm -rf /var/cache/apk/* && mkdir $APP_HOME
 
