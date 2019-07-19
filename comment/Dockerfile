@@ -10,7 +10,7 @@ ENV APP_HOME=/app \
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 ADD Gemfile* $APP_HOME/
-RUN bundle install && bundle clean
+RUN bundle install && bundle clean --force
 ADD . $APP_HOME
 
 CMD ["puma"]
