@@ -1,14 +1,16 @@
-FROM ruby:2.2
-RUN apt-get update -qq && apt-get install -y build-essential
-ENV APP_HOME /app
+FROM ubuntu:16.04
+RUN apt-get update \
+    && apt-get install -y ruby-full ruby-dev build-essential \
+    && gem install bundler --no-ri --no-rdoc
+
+
+ENV APP_HOME=/app \
+    COMMENT_DATABASE_HOST=comment_db_host \
+    COMMENT_DATABASE=comments
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 ADD Gemfile* $APP_HOME/
 RUN bundle install && bundle clean
-RUN bundle install
 ADD . $APP_HOME
-
-ENV COMMENT_DATABASE_HOST comment_db_host
-ENV COMMENT_DATABASE comments
 
 CMD ["puma"]
