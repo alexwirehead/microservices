@@ -15,12 +15,12 @@ services:
       - reddit
   post:
     build: ./post-py
-    image: ${USERNAME}:/post:1.0
+    image: ${USERNAME}/post:1.0
     networks:
       - reddit
   comment:
     build: ./comment
-    image: ${USERNAME}:/comment:1.0
+    image: ${USERNAME}/comment:1.0
     networks:
       - reddit
 volumes:
