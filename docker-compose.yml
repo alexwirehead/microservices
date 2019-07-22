@@ -1,0 +1,42 @@
+---
+version: '3.3'
+services:
+  post_db:
+    image: mongo:${MONGODB_IMAGE_TAG}
+    volumes:
+      - post_db:/data_db
+    networks:
+      reddit:
+        aliases:
+          - ${DB_NETWORK_ALIAS_COMMENT}
+          - ${DB_NETWORK_ALIAS_POST}
+    container_name: ${DB_CONTAINER_NAME}
+  ui:
+    build: ./ui
+    image: ${USERNAME}/ui:${UI_IMAGE_TAG}
+    ports:
+      - ${UI_PORTS}:${UI_PORTS}/tcp
+    networks:
+      - reddit
+    container_name: ${UI_CONTAINER_NAME}
+  post:
+    build: ./post-py
+    image: ${USERNAME}/post:${POST_IMAGE_TAG}
+    networks:
+      reddit:
+        aliases:
+          - ${POST_NETWORK_ALIAS}
+    container_name: ${POST_CONTAINER_NAME}
+  comment:
+    build: ./comment
+    image: ${USERNAME}/comment:${COMMENT_IMAGE_TAG}
+    networks:
+      reddit:
+        aliases:
+          - ${COMMENT_NETWORK_ALIAS}
+    container_name: ${COMMENT_CONTAINER_NAME}
+
+volumes:
+  post_db:
+networks:
+  reddit:
