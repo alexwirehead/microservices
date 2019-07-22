@@ -1,3 +1,4 @@
+---
 version: '3.3'
 services:
   post_db:
@@ -5,7 +6,10 @@ services:
     volumes:
       - post_db:/data_db
     networks:
-      - reddit
+      reddit:
+        aliases:
+          - comment_db_host
+          - post_db_host
   ui:
     build: ./ui
     image: ${USERNAME}/ui:1.0
@@ -17,12 +21,16 @@ services:
     build: ./post-py
     image: ${USERNAME}/post:1.0
     networks:
-      - reddit
+      reddit:
+        aliases:
+          - post_host
   comment:
     build: ./comment
     image: ${USERNAME}/comment:1.0
     networks:
-      - reddit
+      reddit:
+        aliases:
+          - comment_host
 volumes:
   post_db:
 networks:
