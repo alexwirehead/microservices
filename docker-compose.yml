@@ -23,7 +23,7 @@ services:
     build: ./post-py
     image: ${USERNAME}/post:${POST_IMAGE_TAG}
     networks:
-      ${NETWORK_NAME}:
+      reddit:
         aliases:
           - ${POST_NETWORK_ALIAS}
     container_name: ${POST_CONTAINER_NAME}
