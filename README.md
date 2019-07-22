@@ -4,7 +4,7 @@
 * ui — микросервис веб-интерфейса
 * post-py — микросервис постов
 ---
-0. Склонировать рипозиторий и перейти в директорию:
+0. Склонировать репозиторий и перейти в директорию:
 ```bash
 git clone https://github.com/alexwirehead/microservices.git && cd microservices
 ```
