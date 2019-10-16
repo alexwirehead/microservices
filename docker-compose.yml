@@ -10,6 +10,7 @@ services:
         aliases:
           - ${DB_NETWORK_ALIAS_COMMENT}
           - ${DB_NETWORK_ALIAS_POST}
+          - ${DB_NETWORK_ALIAS_EXPORTER}
     container_name: ${DB_CONTAINER_NAME}
   ui:
 #    build: ./ui
@@ -58,6 +59,14 @@ services:
       reddit:
         aliases:
           - ${NODE_EXPORTER_NETWORK_ALIAS}
+  mongodb_exporter:
+    image: ${USERNAME}/mongodb_exporter:latest
+    command:
+      - '-mongodb.uri "mongodb://${DB_NETWORK_ALIAS_EXPORTER}:27017'
+    networks:
+      reddit:
+        aliases:
+          - ${MONGO_NODE_EXPORTER_NETWORK_ALIAS}
 
 volumes:
   post_db:
