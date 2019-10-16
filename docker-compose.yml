@@ -43,6 +43,21 @@ services:
       reddit:
         aliases:
           - ${PROMETHEUS_NETWORK_ALIAS}
+  node_exporter:
+    image: prom/node-exporter:latest
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host:/sys:ro
+      - /:/rootfs:to
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    networks:
+      reddit:
+        aliases:
+          - ${NODE_EXPORTER_NETWORK_ALIAS}
 
 volumes:
   post_db:
