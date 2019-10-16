@@ -61,8 +61,7 @@ services:
           - ${NODE_EXPORTER_NETWORK_ALIAS}
   mongodb_exporter:
     image: ${USERNAME}/mongodb_exporter:latest
-    command:
-      - '-mongodb.uri "mongodb://${DB_NETWORK_ALIAS_EXPORTER}:27017'
+    command: "-mongodb.uri mongodb://${DB_NETWORK_ALIAS_EXPORTER}:27017"
     networks:
       reddit:
         aliases:

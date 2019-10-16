@@ -24,4 +24,4 @@ scrape_configs:
   - job_name: 'mongo'
     static_configs:
       - targets:
-        - 'mongo-exporter:9100'
+        - 'mongo-exporter:9001'
